@@ -6,7 +6,7 @@
 #    By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 14:00:10 by ltheveni          #+#    #+#              #
-#    Updated: 2024/12/18 14:25:46 by ltheveni         ###   ########.fr        #
+#    Updated: 2024/12/18 16:56:22 by ltheveni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,23 +35,36 @@ INCLUDE = -I includes
 CFLAGS = -Wall -Werror -Wextra
 LIBFLAGS = -L $(LIB_DIR) -lft
 RM = rm -rf
-DEBUG_FLAGS = -g3
+DEBUG_FLAGS = -g4
 
 # C program
 SRCS = $(shell find $(SRC_DIR) -name '*.c')
 OBJS = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-# Recipe
-all: $(LIBFT) $(NAME)
+# OS ?
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)
+	MLX_DIR = minilibx
+	MLX_FLAGS = -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+else
+	MLX_DIR = minilibx-linux
+	MLX_FLAGS = -L $(MLX_DIR) -lmlx -lXext -lx11 -lm
+endif
 
-$(NAME): $(LIB_DIR)$(LIBFT).a $(OBJS)
+# Recipe
+all: $(LIBFT) $(MLX_DIR)/libmlx.a $(NAME)
+
+$(NAME): $(LIB_DIR)$(LIBFT).a $(OBJS) $(MLX_DIR)/libmlx.a
 	@printf "$(_END)\nCompiled source files\n"
-	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFLAGS) $(MLX_FLAGS) -o $@
 	@printf "$(_GREEN)Finish compiling $(NAME)!\n"
 	@printf "Try \"./$(NAME)\" to use$(_END)\n"
 
 $(LIBFT):
 	@make -C $(LIB_DIR)
+
+$(MLX_DIR)/libmlx.a:
+	@make -C $(MLX_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@if [ ! -d $(OBJ_DIR) ];then mkdir $(OBJ_DIR); fi
@@ -61,11 +74,13 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
 	@make clean -C $(LIB_DIR)
+	@make clean -C $(MLX_DIR)
 	@$(RM) $(OBJ_DIR)
 
 fclean:
 	@printf "$(_RED)Removing object files and program ...$(_END)\n"
 	@make fclean -C $(LIB_DIR)
+	@make clean -C $(MLX_DIR)
 	@$(RM) $(NAME) $(OBJ_DIR)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:22:24 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 12:06:49 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:36:01 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void		free_map(char **map, int size);
 char		**get_map(const char *path, int line_count, int *column_count);
 int			count_lines(const char *path);
 void		init_settings(t_settings *settings, const char *path);
-void		error_map(char *line, char *msg);
+void		error_map(char *line, int fd, t_settings *settings, char *msg);
 void		count_all(char *line, int *count);
-void		check_count(int *count);
-void		check_map(t_settings settings, const char *path);
+void		check_count(int *count, t_settings *settings);
+void		check_map(t_settings *settings, const char *path);
 
 #endif

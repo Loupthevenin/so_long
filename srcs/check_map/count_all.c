@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 15:37:27 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/21 16:19:09 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:37:47 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void	count_all(char *line, int *count)
 	}
 }
 
-void	check_count(int *count)
+void	check_count(int *count, t_settings *settings)
 {
 	if (count[0] != 1 || count[1] != 1 || count[2] < 1)
 	{
+		free_map(settings->map, settings->line);
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("1 P, 1 E, 1 C", 2);
 		exit(EXIT_FAILURE);

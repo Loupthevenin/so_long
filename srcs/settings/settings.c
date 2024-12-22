@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:02:51 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 12:06:13 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:10:58 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ static char	**malloc_map(const char *path, int line_count, int *column_count)
 		return (NULL);
 	}
 	line = get_next_line(fd);
-	if (line)
-	{
-		*column_count = ft_strlen(line) - 1;
-		free(line);
-	}
+	*column_count = ft_strlen(line) - 1;
+	free(line);
 	close(fd);
 	return (result);
 }

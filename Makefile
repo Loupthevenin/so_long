@@ -6,7 +6,7 @@
 #    By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 14:00:10 by ltheveni          #+#    #+#              #
-#    Updated: 2024/12/22 11:45:59 by ltheveni         ###   ########.fr        #
+#    Updated: 2024/12/22 14:52:56 by ltheveni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ ifeq ($(UNAME), Darwin)
 	MLX_FLAGS = -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 else
 	MLX_DIR = minilibx-linux
-	MLX_FLAGS = -L $(MLX_DIR) -lmlx -lXext -lx11 -lm
+	MLX_FLAGS = -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 endif
 
 # Recipe

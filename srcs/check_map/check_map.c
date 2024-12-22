@@ -6,40 +6,40 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 20:20:03 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 12:00:58 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:35:32 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void	rect_map(char *line, t_settings settings)
+static void	rect_map(char *line, int fd, t_settings *settings)
 {
-	if ((int)ft_strlen(line) - 1 != settings.column)
-		error_map(line, "Rectangle only");
+	if ((int)ft_strlen(line) - 1 != settings->column)
+		error_map(line, fd, settings, "Rectangle only");
 }
 
-static void	wall_map(char *line, t_settings settings, int i)
+static void	wall_map(char *line, t_settings *settings, int i, int fd)
 {
 	int	j;
 
-	if (i == 0 || i == settings.line - 1)
+	if (i == 0 || i == settings->line - 1)
 	{
 		j = 0;
 		while (line[j] != '\n')
 		{
 			if (line[j] != '1')
-				error_map(line, "Wall");
+				error_map(line, fd, settings, "Wall");
 			j++;
 		}
 	}
 	else
 	{
-		if (line[0] != '1' || line[settings.column - 1] != '1')
-			error_map(line, "Wall");
+		if (line[0] != '1' || line[settings->column - 1] != '1')
+			error_map(line, fd, settings, "Wall");
 	}
 }
 
-static int	*loop_check_map(t_settings settings, int *count, const char *path)
+static int	*loop_check_map(t_settings *settings, int *count, const char *path)
 {
 	char	*line;
 	int		fd;
@@ -57,8 +57,8 @@ static int	*loop_check_map(t_settings settings, int *count, const char *path)
 			free(line);
 			break ;
 		}
-		rect_map(line, settings);
-		wall_map(line, settings, i);
+		rect_map(line, fd, settings);
+		wall_map(line, settings, i, fd);
 		count_all(line, count);
 		free(line);
 		i++;
@@ -67,7 +67,7 @@ static int	*loop_check_map(t_settings settings, int *count, const char *path)
 	return (count);
 }
 
-void	check_map(t_settings settings, const char *path)
+void	check_map(t_settings *settings, const char *path)
 {
 	int	count[3];
 
@@ -75,5 +75,5 @@ void	check_map(t_settings settings, const char *path)
 	count[1] = 0;
 	count[2] = 0;
 	loop_check_map(settings, count, path);
-	check_count(count);
+	check_count(count, settings);
 }

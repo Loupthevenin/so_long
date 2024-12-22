@@ -1,44 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 14:21:07 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 11:48:03 by ltheveni         ###   ########.fr       */
+/*   Created: 2024/12/22 10:35:48 by ltheveni          #+#    #+#             */
+/*   Updated: 2024/12/22 11:15:28 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static void	print_map(char **map, int line_count)
+void	free_map(char **map, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < line_count)
+	while (i < size)
 	{
-		ft_printf("%s\n", map[i]);
+		free(map[i]);
 		i++;
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	void		*mlx;
-	t_settings	settings;
-
-	if (argc != 2)
-	{
-		perror("./so_long map.ber");
-		return (1);
-	}
-	init_settings(&settings, argv[1]);
-	/* print_map(settings.map, settings.line); */
-	check_map(settings, argv[1]);
-	mlx = mlx_init();
-	mlx_new_window(mlx, settings.width, settings.height, "so_long");
-	mlx_loop(mlx);
-	return (0);
+	free(map);
 }

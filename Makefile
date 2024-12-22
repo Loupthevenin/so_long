@@ -6,7 +6,7 @@
 #    By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 14:00:10 by ltheveni          #+#    #+#              #
-#    Updated: 2024/12/18 16:56:22 by ltheveni         ###   ########.fr        #
+#    Updated: 2024/12/22 11:45:59 by ltheveni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(MLX_DIR)/libmlx.a:
 	@make -C $(MLX_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@if [ ! -d $(OBJ_DIR) ];then mkdir $(OBJ_DIR); fi
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

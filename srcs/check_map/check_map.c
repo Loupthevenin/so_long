@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 20:20:03 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 15:35:32 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/23 11:08:58 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void	check_map(t_settings *settings, const char *path)
 	count[1] = 0;
 	count[2] = 0;
 	loop_check_map(settings, count, path);
+	settings->collectible = count[2];
 	check_count(count, settings);
 }

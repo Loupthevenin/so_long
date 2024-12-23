@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:22:24 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 15:36:01 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/23 12:27:16 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_settings
 	int		line;
 	int		width;
 	int		height;
+	int		collectible;
+	int		exit;
 	char	**map;
 }			t_settings;
 
@@ -36,5 +38,7 @@ void		error_map(char *line, int fd, t_settings *settings, char *msg);
 void		count_all(char *line, int *count);
 void		check_count(int *count, t_settings *settings);
 void		check_map(t_settings *settings, const char *path);
+void		find_exit(t_settings *settings);
+void		print_map(char **map, int line_count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 12:03:35 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/23 14:04:05 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/24 16:03:10 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	init_settings(t_settings *settings, const char *path)
 {
 	settings->line = count_lines(path);
 	settings->map = get_map(path, settings->line, &settings->column);
-	settings->width = settings->column * 64;
-	settings->height = settings->line * 64;
+	settings->sprite_size = 32;
+	settings->width = settings->sprite_size * settings->column;
+	settings->height = settings->sprite_size * settings->line;
 	settings->exit = 0;
 }

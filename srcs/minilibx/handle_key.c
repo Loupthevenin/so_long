@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:27:05 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/26 11:49:19 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:49:30 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 static int	press_keys(int key, int *new_x, int *new_y, t_game *game)
 {
-	if (key == 13)
+	if (key == 119)
 	{
 		*new_y -= 1;
 		return (1);
 	}
-	else if (key == 1)
+	else if (key == 115)
 	{
 		*new_y += 1;
 		return (1);
 	}
-	else if (key == 0)
+	else if (key == 97)
 	{
 		*new_x -= 1;
 		return (1);
 	}
-	else if (key == 2)
+	else if (key == 100)
 	{
 		*new_x += 1;
 		return (1);
 	}
-	else if (key == 53)
+	else if (key == 65307)
 		close_window(game);
 	return (0);
 }
@@ -65,7 +65,7 @@ int	handle_key(int key, t_game *game)
 	{
 		game->settings->count_move += 1;
 		ft_printf("Le nombre de mouvement du joueur est de : %d\n",
-			game->settings->count_move);
+					game->settings->count_move);
 	}
 	move_player(game, new_x, new_y);
 	return (0);

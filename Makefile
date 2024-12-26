@@ -6,7 +6,7 @@
 #    By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 14:00:10 by ltheveni          #+#    #+#              #
-#    Updated: 2024/12/22 14:52:56 by ltheveni         ###   ########.fr        #
+#    Updated: 2024/12/24 21:52:52 by ltheveni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INCLUDE = -I includes
 CFLAGS = -Wall -Werror -Wextra
 LIBFLAGS = -L $(LIB_DIR) -lft
 RM = rm -rf
-DEBUG_FLAGS = -g4
+DEBUG_FLAGS = -g3
 
 # C program
 SRCS = $(shell find $(SRC_DIR) -name '*.c')

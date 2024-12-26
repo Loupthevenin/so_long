@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:22:24 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/24 16:32:51 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:26:33 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_settings
 	int			collectible;
 	int			exit;
 	char		**map;
+	int			player_x;
+	int			player_y;
+	int			count_move;
 }				t_settings;
 
 typedef struct s_mlx
@@ -60,6 +63,8 @@ void			find_exit(t_settings *settings);
 void			print_map(char **map, int line_count);
 void			init_sprite(t_mlx *mlx, t_settings *settings);
 void			draw_map(t_mlx *mlx, t_settings *settings);
+int				close_window(t_game *game);
+int				handle_key(int key, t_game *game);
 void			init_mlx(t_settings *settings);
 
 #endif

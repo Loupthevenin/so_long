@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 15:37:27 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/22 15:37:47 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/24 22:31:13 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	count_all(char *line, int *count)
 	int	i;
 
 	i = 0;
-	while (line[i] && line[i] != '\n')
+	while (line[i] != '\n')
 	{
 		if (line[i] == 'E')
 			count[0]++;

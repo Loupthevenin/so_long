@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 09:28:20 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/24 16:21:11 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:54:08 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ static void	put_image(t_mlx *mlx, t_settings *settings, int i, int j)
 
 	x = j * settings->sprite_size;
 	y = i * settings->sprite_size;
+	if (settings->map[i][j] == '0' || settings->map[i][j] == 'P'
+		|| settings->map[i][j] == 'C' || settings->map[i][j] == 'E')
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->floor_sprite, x, y);
 	if (settings->map[i][j] == '1')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->wall_sprite, x, y);
 	else if (settings->map[i][j] == 'P')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->player_sprite, x, y);
 	else if (settings->map[i][j] == 'C')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->collectible_sprite, x,
-				y);
+			y);
 	else if (settings->map[i][j] == 'E')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->exit_sprite, x, y);
 }

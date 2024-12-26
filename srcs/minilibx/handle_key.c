@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:27:05 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/26 15:49:30 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:17:37 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,22 @@ static int	press_keys(int key, int *new_x, int *new_y, t_game *game)
 static void	move_player(t_game *game, int new_x, int new_y)
 {
 	t_settings	*settings;
+	int			is_exit;
 
 	settings = game->settings;
-	if (game->settings->map[new_y][new_x] != '1')
+	is_exit = 0;
+	if (settings->map[new_y][new_x] != '1')
 	{
+		if (settings->map[new_y][new_x] == 'E')
+			is_exit = 1;
 		settings->map[settings->player_y][settings->player_x] = '0';
 		settings->map[new_y][new_x] = 'P';
 		settings->player_x = new_x;
 		settings->player_y = new_y;
 		draw_map(&game->mlx, settings);
 	}
+	if (is_exit)
+		close_window(game);
 }
 
 int	handle_key(int key, t_game *game)
@@ -65,7 +71,7 @@ int	handle_key(int key, t_game *game)
 	{
 		game->settings->count_move += 1;
 		ft_printf("Le nombre de mouvement du joueur est de : %d\n",
-					game->settings->count_move);
+			game->settings->count_move);
 	}
 	move_player(game, new_x, new_y);
 	return (0);

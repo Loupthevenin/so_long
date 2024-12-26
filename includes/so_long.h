@@ -6,14 +6,14 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:22:24 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/26 15:17:33 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:03:21 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "ft_printf.h"
 # include "libft.h"
 # include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:22:24 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/26 18:03:21 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:05:43 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			check_count(int *count, t_settings *settings);
 void			check_map(t_settings *settings, const char *path);
 void			find_exit(t_settings *settings);
 void			print_map(char **map, int line_count);
-void			init_sprite(t_mlx *mlx, t_settings *settings);
+void			init_sprite(t_game *game, t_settings *settings);
 void			draw_map(t_mlx *mlx, t_settings *settings);
 void			cleanup_sprites(t_mlx *mlx);
 int				close_window(t_game *game);

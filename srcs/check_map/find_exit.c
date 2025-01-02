@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:46:28 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/24 21:55:39 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/02 10:56:59 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	find_exit(t_settings *settings)
 	}
 	flood_fill(player_x, player_y, map_cpy, settings);
 	if ((settings->collectible > 0 && settings->exit == 0)
-		|| settings->collectible != 0)
+		|| settings->collectible != 0 || settings->exit == 0)
 	{
 		free_map(map_cpy, settings->line);
 		free_map(settings->map, settings->line);

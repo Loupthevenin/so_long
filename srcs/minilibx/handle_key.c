@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:27:05 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/26 18:17:37 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/02 10:26:20 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ static void	move_player(t_game *game, int new_x, int new_y)
 		settings->map[new_y][new_x] = 'P';
 		settings->player_x = new_x;
 		settings->player_y = new_y;
+		game->settings->count_move += 1;
+		ft_printf("Le nombre de mouvement du joueur est de : %d\n",
+			game->settings->count_move);
 		draw_map(&game->mlx, settings);
 	}
 	if (is_exit)
@@ -68,11 +71,6 @@ int	handle_key(int key, t_game *game)
 	new_x = game->settings->player_x;
 	new_y = game->settings->player_y;
 	if (press_keys(key, &new_x, &new_y, game))
-	{
-		game->settings->count_move += 1;
-		ft_printf("Le nombre de mouvement du joueur est de : %d\n",
-			game->settings->count_move);
-	}
-	move_player(game, new_x, new_y);
+		move_player(game, new_x, new_y);
 	return (0);
 }

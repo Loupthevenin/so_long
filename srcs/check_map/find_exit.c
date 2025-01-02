@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:46:28 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/02 10:56:59 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:23:15 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	flood_fill(int x, int y, char **map, t_settings *settings)
 {
 	if (x < 0 || y < 0 || x >= settings->line || y >= settings->column)
 		return ;
-	if (map[x][y] == '1' || map[x][y] == 'V')
+	if (map[x][y] == '1' || map[x][y] == 'E' || map[x][y] == 'V')
 		return ;
 	if (map[x][y] == 'C')
 		settings->collectible--;

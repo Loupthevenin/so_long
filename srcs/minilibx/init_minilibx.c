@@ -6,11 +6,22 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:59:35 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/03 09:46:09 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/03 11:51:41 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
+
+static void	error_mlx(t_game *game, char *mess)
+{
+	ft_putstr_fd(mess, 2);
+	if (game->mlx.mlx)
+		mlx_destroy_display(game->mlx.mlx);
+	if (game->mlx.mlx)
+		free(game->mlx.mlx);
+	free_map(game->settings->map, game->settings->line);
+	exit(EXIT_FAILURE);
+}
 
 void	cleanup_sprites(t_mlx *mlx)
 {
@@ -49,18 +60,13 @@ void	init_mlx(t_settings *settings)
 	game.settings = settings;
 	game.mlx.mlx = mlx_init();
 	if (!game.mlx.mlx)
-	{
-		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("mlx init\n", 2);
-		close_window(&game, EXIT_FAILURE);
-	}
+		error_mlx(&game, "Error\nmlx init\n");
 	game.mlx.win = mlx_new_window(game.mlx.mlx, settings->width,
 			settings->height, "so_long");
 	if (!game.mlx.win)
 	{
-		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("mlx window\n", 2);
-		close_window(&game, EXIT_FAILURE);
+		mlx_destroy_window(game.mlx.mlx, game.mlx.win);
+		error_mlx(&game, "Error\nmlx window\n");
 	}
 	init_sprite(&game, settings);
 	draw_map(&game.mlx, settings);

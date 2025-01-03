@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:59:35 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/02 12:08:33 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:46:09 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cleanup_sprites(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->floor_sprite);
 }
 
-int	close_window(t_game *game)
+int	close_window(t_game *game, int status)
 {
 	cleanup_sprites(&game->mlx);
 	if (game->mlx.win)
@@ -39,7 +39,7 @@ int	close_window(t_game *game)
 	if (game->mlx.mlx)
 		free(game->mlx.mlx);
 	free_map(game->settings->map, game->settings->line);
-	exit(EXIT_SUCCESS);
+	exit(status);
 }
 
 void	init_mlx(t_settings *settings)
@@ -48,12 +48,24 @@ void	init_mlx(t_settings *settings)
 
 	game.settings = settings;
 	game.mlx.mlx = mlx_init();
+	if (!game.mlx.mlx)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("mlx init\n", 2);
+		close_window(&game, EXIT_FAILURE);
+	}
 	game.mlx.win = mlx_new_window(game.mlx.mlx, settings->width,
 			settings->height, "so_long");
+	if (!game.mlx.win)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("mlx window\n", 2);
+		close_window(&game, EXIT_FAILURE);
+	}
 	init_sprite(&game, settings);
 	draw_map(&game.mlx, settings);
 	mlx_hook(game.mlx.win, 17, 0, close_window, &game);
 	mlx_key_hook(game.mlx.win, handle_key, &game);
 	mlx_loop(game.mlx.mlx);
-	close_window(&game);
+	close_window(&game, EXIT_SUCCESS);
 }

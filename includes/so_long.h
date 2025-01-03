@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:22:24 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/02 12:05:43 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:45:40 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_game
 }				t_game;
 
 void			free_map(char **map, int size);
+void			char_map(char *line, int fd, t_settings *settings);
+char			**map_dup(t_settings settings);
 char			**get_map(const char *path, int line_count, int *column_count);
 int				count_lines(const char *path);
 void			init_settings(t_settings *settings, const char *path);
@@ -64,7 +66,7 @@ void			print_map(char **map, int line_count);
 void			init_sprite(t_game *game, t_settings *settings);
 void			draw_map(t_mlx *mlx, t_settings *settings);
 void			cleanup_sprites(t_mlx *mlx);
-int				close_window(t_game *game);
+int				close_window(t_game *game, int status);
 int				handle_key(int key, t_game *game);
 void			init_mlx(t_settings *settings);
 

@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 20:20:03 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/26 15:43:22 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:51:34 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	rect_map(char *line, int fd, t_settings *settings)
 {
 	if ((int)ft_strlen(line) - 1 != settings->column)
-		error_map(line, fd, settings, "Rectangle only");
+		error_map(line, fd, settings, "Rectangle only\n");
 }
 
 static void	wall_map(char *line, t_settings *settings, int i, int fd)
@@ -28,14 +28,14 @@ static void	wall_map(char *line, t_settings *settings, int i, int fd)
 		while (line[j] != '\n')
 		{
 			if (line[j] != '1')
-				error_map(line, fd, settings, "Wall");
+				error_map(line, fd, settings, "Wall\n");
 			j++;
 		}
 	}
 	else
 	{
 		if (line[0] != '1' || line[settings->column - 1] != '1')
-			error_map(line, fd, settings, "Wall");
+			error_map(line, fd, settings, "Wall\n");
 	}
 }
 
@@ -59,6 +59,7 @@ static int	loop_check_map(t_settings *settings, int *count, const char *path)
 		}
 		rect_map(line, fd, settings);
 		wall_map(line, settings, i, fd);
+		char_map(line, fd, settings);
 		count_all(line, count);
 		free(line);
 		i++;
@@ -76,7 +77,7 @@ static void	check_path(t_settings *settings, const char *path)
 	{
 		free_map(settings->map, settings->line);
 		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd(".ber file", 2);
+		ft_putstr_fd(".ber file\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -93,7 +94,7 @@ void	check_map(t_settings *settings, const char *path)
 	{
 		free_map(settings->map, settings->line);
 		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("File not found", 2);
+		ft_putstr_fd("File not found\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	settings->collectible = count[2];

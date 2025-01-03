@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:35:48 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/02 09:45:47 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:59:22 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,26 @@ void	free_map(char **map, int size)
 		i++;
 	}
 	free(map);
+}
+
+char	**map_dup(t_settings settings)
+{
+	int		i;
+	char	**result;
+
+	result = (char **)malloc(sizeof(char *) * settings.line);
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (i < settings.line)
+	{
+		result[i] = ft_strdup(settings.map[i]);
+		if (!result[i])
+		{
+			free_map(result, i);
+			return (NULL);
+		}
+		i++;
+	}
+	return (result);
 }

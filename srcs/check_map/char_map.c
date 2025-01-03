@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_all.c                                        :+:      :+:    :+:   */
+/*   char_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 15:37:27 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/03 10:11:53 by ltheveni         ###   ########.fr       */
+/*   Created: 2025/01/02 16:50:07 by ltheveni          #+#    #+#             */
+/*   Updated: 2025/01/02 17:00:01 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-void	count_all(char *line, int *count)
+void	char_map(char *line, int fd, t_settings *settings)
 {
 	int	i;
 
 	i = 0;
 	while (line[i] != '\n')
 	{
-		if (line[i] == 'E')
-			count[0]++;
-		else if (line[i] == 'P')
-			count[1]++;
-		else if (line[i] == 'C')
-			count[2]++;
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'P' && line[i] != 'C'
+			&& line[i] != 'E')
+			error_map(line, fd, settings, "Invalid char in map\n");
 		i++;
-	}
-}
-
-void	check_count(int *count, t_settings *settings)
-{
-	if (count[0] != 1 || count[1] != 1 || count[2] < 1)
-	{
-		free_map(settings->map, settings->line);
-		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("1 P, 1 E, 1 C\n", 2);
-		exit(EXIT_FAILURE);
 	}
 }

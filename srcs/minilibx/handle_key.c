@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:27:05 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/02 10:26:20 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/03 11:02:17 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,18 @@ static int	press_keys(int key, int *new_x, int *new_y, t_game *game)
 		return (1);
 	}
 	else if (key == 65307)
-		close_window(game);
+		close_window(game, EXIT_SUCCESS);
 	return (0);
+}
+
+static void	set_value(t_game *game, int new_x, int new_y)
+{
+	game->settings->map[new_y][new_x] = 'P';
+	game->settings->player_x = new_x;
+	game->settings->player_y = new_y;
+	game->settings->count_move += 1;
+	ft_printf("Le nombre de mouvement du joueur est de : %d\n",
+		game->settings->count_move);
 }
 
 static void	move_player(t_game *game, int new_x, int new_y)
@@ -48,19 +58,24 @@ static void	move_player(t_game *game, int new_x, int new_y)
 	is_exit = 0;
 	if (settings->map[new_y][new_x] != '1')
 	{
-		if (settings->map[new_y][new_x] == 'E')
+		if (settings->map[new_y][new_x] == 'C')
+			settings->collectible--;
+		if (settings->map[new_y][new_x] == 'E' && settings->collectible == 0)
 			is_exit = 1;
-		settings->map[settings->player_y][settings->player_x] = '0';
-		settings->map[new_y][new_x] = 'P';
-		settings->player_x = new_x;
-		settings->player_y = new_y;
-		game->settings->count_move += 1;
-		ft_printf("Le nombre de mouvement du joueur est de : %d\n",
-			game->settings->count_move);
+		if (settings->exit)
+		{
+			settings->map[settings->player_y][settings->player_x] = 'E';
+			settings->exit = 0;
+		}
+		else
+			settings->map[settings->player_y][settings->player_x] = '0';
+		if (settings->map[new_y][new_x] == 'E')
+			settings->exit = 1;
+		set_value(game, new_x, new_y);
 		draw_map(&game->mlx, settings);
 	}
 	if (is_exit)
-		close_window(game);
+		close_window(game, EXIT_SUCCESS);
 }
 
 int	handle_key(int key, t_game *game)

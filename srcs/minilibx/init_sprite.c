@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:32:03 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/02 12:09:19 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:48:05 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,7 @@ static void	*load_xpm(t_game *game, char *path, int img_width, int img_height)
 	{
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("XPM file error\n", 2);
-		cleanup_sprites(&game->mlx);
-		if (game->mlx.win)
-		{
-			mlx_clear_window(game->mlx.mlx, game->mlx.win);
-			mlx_destroy_window(game->mlx.mlx, game->mlx.win);
-		}
-		if (game->mlx.mlx)
-			mlx_destroy_display(game->mlx.mlx);
-		if (game->mlx.mlx)
-			free(game->mlx.mlx);
-		free_map(game->settings->map, game->settings->line);
-		exit(EXIT_FAILURE);
+		close_window(game, EXIT_FAILURE);
 	}
 	return (img);
 }
